@@ -1,5 +1,7 @@
 let amigos = []; 
 let totalAmigos = amigos.length;
+let lista = document.getElementById('listaAmigos');
+let sorteados = [];
 
 function agregarAmigo() {
     let nombre = document.getElementById('amigo').value;
@@ -16,7 +18,6 @@ function agregarAmigo() {
 }
 
 function actualizarLista() {
-    let lista = document.getElementById('listaAmigos');
     lista.innerHTML = '';
   
     for (i = 0; i <= totalAmigos; i++) {
@@ -24,4 +25,32 @@ function actualizarLista() {
         elemento.innerHTML = amigos[i];
         lista.appendChild(elemento);
     }
+}
+
+function sortearAmigo() {
+    let numRandom = Math.floor(Math.random() * totalAmigos);
+    let amigoSorteado = amigos[numRandom];
+
+    if (amigos.length != sorteados.length) {
+        if (amigos.length < 2) {
+            alert('Inserta al menos dos nombres.');
+        } else {
+            if (sorteados.includes(amigoSorteado)) {
+                sortearAmigo()
+            } else {
+                document.getElementById('resultado').innerHTML = amigoSorteado;
+                sorteados.push(amigoSorteado);
+            }
+        }
+    } else {
+        alert('Ya se han sorteado todos los nombres.');
+        condicionesIniciales();
+    }
+}
+
+function condicionesIniciales() {
+    amigos = [];
+    sorteados = [];
+    lista.innerHTML = '';    
+    document.getElementById('resultado').innerHTML = '';
 }

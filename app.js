@@ -4,10 +4,10 @@ let lista = document.getElementById('listaAmigos');
 let sorteados = [];
 
 function agregarAmigo() {
-    let nombre = document.getElementById('amigo').value;
+    let nombre = document.getElementById('amigo').value.trim();
     const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
-    if (nombre == '') {
+    if (nombre === '') {
         alert("Por favor, inserte un nombre.");
     } else if (!soloLetras.test(nombre)) {
         alert("El nombre solo debe contener letras.");

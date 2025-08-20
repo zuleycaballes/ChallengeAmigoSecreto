@@ -1,26 +1,33 @@
 let amigos = []; 
-let totalAmigos = amigos.length;
+let totalAmigos = 0;
 let lista = document.getElementById('listaAmigos');
 let sorteados = [];
 
 function agregarAmigo() {
     let nombre = document.getElementById('amigo').value;
+    const soloLetras = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
 
     if (nombre == '') {
         alert("Por favor, inserte un nombre.");
+    } else if (!soloLetras.test(nombre)) {
+        alert("El nombre solo debe contener letras.");
+    } else if (nombre.length > 21) {
+        alert("El nombre debe tener menos de 20 caracteres.");
+    } else if (amigos.includes(nombre)) {
+        alert("Ese nombre ya fue agregado.");
     } else {
         amigos.push(nombre);
+        totalAmigos = amigos.length;
         actualizarLista();
     }
 
     document.getElementById('amigo').value = '';
-    totalAmigos = amigos.length;
 }
 
 function actualizarLista() {
     lista.innerHTML = '';
   
-    for (i = 0; i <= totalAmigos; i++) {
+    for (i = 0; i < totalAmigos; i++) {
         let elemento = document.createElement('li');
         elemento.innerHTML = amigos[i];
         lista.appendChild(elemento);
